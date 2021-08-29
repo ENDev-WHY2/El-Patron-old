@@ -6,6 +6,10 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import javax.annotation.Nonnull;
 
 public class CommandsListener extends ListenerAdapter {
+    /**
+     * This class can be use like ListenerAdapter, but it comes with special feathers specially for commands.
+     */
+
     private GuildMessageReceivedEvent e;
 
     public void setEvent(GuildMessageReceivedEvent e) {
