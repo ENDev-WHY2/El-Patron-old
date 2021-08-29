@@ -4,6 +4,9 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import org.endev.elpatron.commands.Help;
+import org.endev.elpatron.commands.Status;
+import org.endev.elpatron.events.MemberJoinLeaveEvent;
 
 import javax.security.auth.login.LoginException;
 import java.io.IOException;
@@ -19,6 +22,8 @@ public class Main
         jda = JDABuilder.createDefault(token.getToken())
                 .setActivity(Activity.playing("ENGOvo gril..."))
                 .build();
+
+        Listeners.listeners();
     }
 
     public static boolean check(GuildMessageReceivedEvent event)
@@ -29,5 +34,27 @@ public class Main
     public static String[] args(GuildMessageReceivedEvent event)
     {
         return event.getMessage().getContentRaw().substring(Config.PREFIX.length()).split(" ");
+    }
+
+    public static class Listeners {
+
+        public static final CommandsListener[] COMMANDS = {
+                new Help(),
+                new Status(),
+        };
+
+        public static final Object[] EVENTS = {
+                new MemberJoinLeaveEvent(),
+        };
+
+        private static void listeners() {
+            for (Object i : COMMANDS) {
+                jda.addEventListener(i);
+            }
+
+            for (Object i : EVENTS) {
+                jda.addEventListener(i);
+            }
+        }
     }
 }
