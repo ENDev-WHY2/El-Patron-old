@@ -24,7 +24,7 @@ public class CommandsListener extends ListenerAdapter {
     }
 
     public String getName() {
-        return getClass().getName();
+        return getClass().getSimpleName();
     }
 
     protected String getDisplayName() {
@@ -40,8 +40,18 @@ public class CommandsListener extends ListenerAdapter {
     protected boolean isCommand(String command) {
         if (Main.check(e)) return false;
 
-        if (getArgs()[0].equalsIgnoreCase(Config.PREFIX + command))
+        if (getArgs()[0].toLowerCase().equalsIgnoreCase(Config.PREFIX + command))
             return true;
+        return false;
+    }
+
+    protected boolean isCommand(String[] aliases) {
+
+        for (String i : aliases) {
+            if (isCommand(i))
+                return true;
+        }
+
         return false;
     }
 }

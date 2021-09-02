@@ -20,6 +20,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
 
     implementation("net.dv8tion:JDA:4.3.0_310")
+    implementation 'org.jsoup:jsoup:1.14.2' // Added by Bakterio, don't delete. (This lib is for webscraping.)
 }
 
 test {
